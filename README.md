@@ -21,10 +21,10 @@ Service : Logique métier.
 Repository : Accès aux données avec Spring Data JPA.
 Model : Entités et relations JPA.
 # 🛠️ Technologies Utilisées
-Langage : Java ☕
-Framework : Spring Boot 🚀
-Base de Données : Postgres 🗄️
-Tests : JUnit, Mockito ✅
-Mapping : MapStruct 🔄
-Documentation API : Swagger 🖹
-Build Tool : Maven 📦
+#### Langage : Java ☕
+#### Framework : Spring Boot 🚀
+#### Base de Données : Postgres 🗄️
+#### Tests : JUnit, Mockito ✅
+#### Mapping : MapStruct 🔄
+#### Documentation API : Swagger 🖹
+#### Build Tool : Maven 📦
