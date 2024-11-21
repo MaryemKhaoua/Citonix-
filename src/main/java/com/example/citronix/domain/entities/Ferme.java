@@ -2,43 +2,45 @@ package com.example.citronix.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "farmes")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Ferme {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String nom;
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false)
-    private String localisation;
+    private String location;
 
     @Column(nullable = false)
-    private double superficieTotale;
+    private Double totalArea;
 
     @Column(nullable = false)
-    private LocalDate dateCreation;
+    private LocalDate creationDate;
 
     @OneToMany(mappedBy = "ferme", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Champ> champs;
+    private List<Champ> fields;
 
-    public double calculerSuperficieChamps() {
-        return champs.stream()
-                .mapToDouble(Champ::getSuperficie)
-                .sum();
+
+    public boolean canAddField(Champ champ) {
+        return fields.size() < 10 &&
+                calculateTotalFieldArea() + champ.getArea() < totalArea;
     }
 
-    public boolean isSuperficieValide() {
-        return calculerSuperficieChamps() < this.superficieTotale;
+    private Double calculateTotalFieldArea() {
+        return fields.stream()
+                .mapToDouble(Champ::getArea)
+                .sum();
     }
 }
