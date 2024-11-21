@@ -1,23 +1,19 @@
 package com.example.citronix.dto;
 
-import com.example.citronix.domain.entities.Champ;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class FermeDTO {
-    private long id;
-    private String nom;
+
+    private Long id;
+    private String name;
     private String location;
-    private double surface;
-    private LocalDate dateCreation;
-    private List<Champ> champs;
+    private Double totalArea;
+    private LocalDate creationDate;
+    private List<ChampDTO> fields;
 }
