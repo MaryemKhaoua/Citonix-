@@ -5,6 +5,7 @@ import com.example.citronix.exception.FermeAlreadyExistsException;
 import com.example.citronix.exception.FermeNotFoundException;
 import com.example.citronix.repository.FermeRepository;
 import com.example.citronix.service.FermeService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class FermeServiceImpl implements FermeService {
 
     private final FermeRepository fermeRepository;
 
-    @Autowired
-    public FermeServiceImpl(FermeRepository fermeRepository) {
-        this.fermeRepository = fermeRepository;
-    }
+
 
     @Override
     public Ferme saveFerme(Ferme ferme) {
@@ -40,12 +39,12 @@ public class FermeServiceImpl implements FermeService {
 
     @Override
     public Optional<Ferme> getFermeByName(String nom) {
-        return fermeRepository.findByNom(nom);
+        return fermeRepository.findByName(nom);
     }
 
     @Override
     public Ferme getFermeByLocalisation(String localisation) {
-        return fermeRepository.findByLocalisation(localisation)
+        return fermeRepository.findBylocation(localisation)
                 .orElseThrow(() -> new FermeNotFoundException("Ferme not found with localisation: " + localisation));
     }
 
