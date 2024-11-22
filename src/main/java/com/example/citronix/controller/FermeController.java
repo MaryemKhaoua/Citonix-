@@ -1,10 +1,13 @@
 package com.example.citronix.controller;
 
 import com.example.citronix.domain.entities.Ferme;
+import com.example.citronix.errors.ErrorResponse;
 import com.example.citronix.service.FermeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,20 +19,26 @@ public class FermeController {
 
     private final FermeService fermeService;
 
-    @Autowired
     public FermeController(FermeService fermeService) {
         this.fermeService = fermeService;
     }
 
     @PostMapping
-    public ResponseEntity<Ferme> createFerme(@RequestBody Ferme ferme) {
+    public ResponseEntity<Object> createFerme(@Valid @RequestBody Ferme ferme, BindingResult result) {
+        if (result.hasErrors()) {
+            List<String> errors = result.getAllErrors().stream()
+                    .map(error -> error.getDefaultMessage())
+                    .toList();
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
         try {
             Ferme savedFerme = fermeService.saveFerme(ferme);
             return new ResponseEntity<>(savedFerme, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse("Error creating Ferme", e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
 
     @GetMapping
     public ResponseEntity<List<Ferme>> getAllFermes() {
