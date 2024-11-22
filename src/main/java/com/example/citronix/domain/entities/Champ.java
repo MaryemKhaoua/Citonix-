@@ -19,11 +19,9 @@ public class Champ {
 
     @Column(nullable = false)
     private Double area;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ferme_id", nullable = false)
     private Ferme ferme;
-
 //    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Tree> trees;
 
