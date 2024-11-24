@@ -19,13 +19,12 @@ public class Recolte {
     @Enumerated(EnumType.STRING)
     private Saison saison;
 
-    private LocalDate harvestDate;
+    private LocalDate recolteDate;
     private Double totalQuantity;
 
-    @OneToMany(mappedBy = "recolt", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recolte", cascade = CascadeType.ALL)
     private List<RecolteDetail> recolteDetails;
 
-    @OneToMany(mappedBy = "recolt", cascade = CascadeType.ALL)
-    private List<Vente> sales;
+    @OneToMany(mappedBy = "recolte", cascade = CascadeType.ALL)
+    private List<Vente> ventes;
 }
-
