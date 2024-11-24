@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1732364364392-1
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: champ
+            constraintName: fk_champ_on_ferme
+  - changeSet:
+      id: 1732364364392-2
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropTable:
+            cascadeConstraints: true
+            tableName: farmes
+

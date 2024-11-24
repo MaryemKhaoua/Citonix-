@@ -1,0 +1,96 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1732205090985-1
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_arbres
+                  name: id
+                  type: BIGINT
+            tableName: arbres
+  - changeSet:
+      id: 1732205090985-2
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_champ
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: area
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ferme_id
+                  type: BIGINT
+            tableName: champ
+  - changeSet:
+      id: 1732205090985-3
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_farmes
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: location
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: total_area
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: creation_date
+                  type: DATE
+            tableName: farmes
+  - changeSet:
+      id: 1732205090985-4
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ferme_id
+            baseTableName: champ
+            constraintName: FK_CHAMP_ON_FERME
+            referencedColumnNames: id
+            referencedTableName: farmes
+

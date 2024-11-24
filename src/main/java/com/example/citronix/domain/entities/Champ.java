@@ -3,6 +3,8 @@ package com.example.citronix.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,16 +24,16 @@ public class Champ {
     @ManyToOne
     @JoinColumn(name = "ferme_id", nullable = false)
     private Ferme ferme;
-//    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Tree> trees;
+    @OneToMany(mappedBy = "champ", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Arbre> arbres;
 
     public boolean isValidArea() {
         return area >= 0.1 &&
                 area <= (ferme.getTotalArea() * 0.5);
     }
 
-//    public boolean canAddTree(Tree tree) {
-//        long treeCount = trees.size() + 1;
-//        return treeCount <= (area * 100);
-//    }
+    public boolean canAddTree(Arbre arbre) {
+        long treeCount = arbres.size() + 1;
+        return treeCount <= (area * 100);
+    }
 }

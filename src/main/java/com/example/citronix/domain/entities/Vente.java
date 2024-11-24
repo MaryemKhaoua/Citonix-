@@ -14,10 +14,11 @@ public class Vente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate saleDate;
+    private LocalDate date;
     private Double unitPrice;
     private Double quantity;
     private String client;
+    private Double revenue;
 
     @ManyToOne
     @JoinColumn(name = "recolte_id")

@@ -14,8 +14,14 @@ import java.util.List;
 @Service
 public class ChampServiceImpl implements ChampService {
 
-    private ChampRepository champRepository;
-    private FermeRepository fermeRepository;
+
+    private final ChampRepository champRepository;
+    private final FermeRepository fermeRepository;
+
+    public ChampServiceImpl(ChampRepository champRepository, FermeRepository fermeRepository) {
+        this.champRepository = champRepository;
+        this.fermeRepository = fermeRepository;
+    }
 
     @Override
     public Champ save(Champ champ) {
