@@ -58,23 +58,6 @@ public class FermeController {
         }
     }
 
-    @GetMapping("/search/by-name")
-    public ResponseEntity<Ferme> getFermeByName(@RequestParam String nom) {
-        Optional<Ferme> ferme = fermeService.getFermeByName(nom);
-        return ferme.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping("/search/by-location")
-    public ResponseEntity<Ferme> getFermeByLocation(@RequestParam String localisation) {
-        try {
-            Ferme ferme = fermeService.getFermeByLocalisation(localisation);
-            return new ResponseEntity<>(ferme, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Ferme> updateFerme(@PathVariable Long id, @RequestBody Ferme fermeDetails) {
         try {
