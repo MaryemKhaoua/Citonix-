@@ -1,6 +1,5 @@
 package com.example.citronix.service.Impl;
 
-import com.example.citronix.domain.entities.Arbre;
 import com.example.citronix.domain.entities.Champ;
 import com.example.citronix.domain.entities.Ferme;
 import com.example.citronix.exception.*;
