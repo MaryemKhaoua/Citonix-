@@ -14,6 +14,7 @@ public interface RecolteService {
     Page<Recolte> getAllRecoltes(Pageable pageable);
     Recolte getRecolteById(Long id);
     void deleteRecolte(Long id);
+    public Recolte updateRecolte(Long id, Recolte recolte);
     boolean validateRecolteSeason(LocalDate recolteDate, Saison saison);
     boolean validateArbreRecolte(Long arbreId, Saison saison, LocalDate recolteDate);
 }

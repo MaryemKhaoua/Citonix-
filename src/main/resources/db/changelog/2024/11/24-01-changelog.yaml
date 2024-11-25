@@ -1,0 +1,230 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1732477256289-1
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_arbres
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: planting_date
+                  type: DATE
+              - column:
+                  name: champ_id
+                  type: BIGINT
+            tableName: arbres
+  - changeSet:
+      id: 1732477256289-2
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_champ
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: area
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ferme_id
+                  type: BIGINT
+            tableName: champ
+  - changeSet:
+      id: 1732477256289-3
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_fermes
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: location
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: total_area
+                  type: DOUBLE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: creation_date
+                  type: DATE
+            tableName: fermes
+  - changeSet:
+      id: 1732477256289-4
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_recolte
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: saison
+                  type: VARCHAR(255)
+              - column:
+                  name: recolte_date
+                  type: DATE
+              - column:
+                  name: total_quantity
+                  type: DOUBLE
+            tableName: recolte
+  - changeSet:
+      id: 1732477256289-5
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_recoltedetail
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: recolte_id
+                  type: BIGINT
+              - column:
+                  name: arbre_id
+                  type: BIGINT
+              - column:
+                  name: quantity
+                  type: DOUBLE
+            tableName: recolte_detail
+  - changeSet:
+      id: 1732477256289-6
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_vente
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: date
+                  type: DATE
+              - column:
+                  name: unit_price
+                  type: DOUBLE
+              - column:
+                  name: quantity
+                  type: DOUBLE
+              - column:
+                  name: client
+                  type: VARCHAR(255)
+              - column:
+                  name: revenue
+                  type: DOUBLE
+              - column:
+                  name: recolte_id
+                  type: BIGINT
+            tableName: vente
+  - changeSet:
+      id: 1732477256289-7
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: champ_id
+            baseTableName: arbres
+            constraintName: FK_ARBRES_ON_CHAMP
+            referencedColumnNames: id
+            referencedTableName: champ
+  - changeSet:
+      id: 1732477256289-8
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ferme_id
+            baseTableName: champ
+            constraintName: FK_CHAMP_ON_FERME
+            referencedColumnNames: id
+            referencedTableName: fermes
+  - changeSet:
+      id: 1732477256289-9
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: arbre_id
+            baseTableName: recolte_detail
+            constraintName: FK_RECOLTEDETAIL_ON_ARBRE
+            referencedColumnNames: id
+            referencedTableName: arbres
+  - changeSet:
+      id: 1732477256289-10
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: recolte_id
+            baseTableName: recolte_detail
+            constraintName: FK_RECOLTEDETAIL_ON_RECOLTE
+            referencedColumnNames: id
+            referencedTableName: recolte
+  - changeSet:
+      id: 1732477256289-11
+      author: Youcode
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: recolte_id
+            baseTableName: vente
+            constraintName: FK_VENTE_ON_RECOLTE
+            referencedColumnNames: id
+            referencedTableName: recolte
+

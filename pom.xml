@@ -46,6 +46,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -54,10 +59,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-            <!-- Version gérée par le parent, donc supprimée -->
         </dependency>
 
+
         <!-- Validation Jakarta -->
+
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
@@ -92,13 +98,6 @@
             <version>42.7.2</version>
         </dependency>
 
-        <!-- Elasticsearch  -->
-        <dependency>
-            <groupId>co.elastic.clients</groupId>
-            <artifactId>elasticsearch-java</artifactId>
-            <version>8.12.0</version>
-        </dependency>
-
         <!-- Jackson pour JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -119,13 +118,6 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.5.2.Final</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- BCrypt -->
-        <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
         </dependency>
 
         <!-- Tests -->

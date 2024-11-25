@@ -5,6 +5,7 @@ import com.example.citronix.errors.ErrorResponse;
 import com.example.citronix.service.FermeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -15,19 +16,20 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/fermes")
+@CrossOrigin(origins = "http://localhost:8080")
 public class FermeController {
 
-    private final FermeService fermeService;
+    private  FermeService fermeService;
 
     public FermeController(FermeService fermeService) {
         this.fermeService = fermeService;
     }
 
-    @PostMapping
+    @PostMapping("/save ")
     public ResponseEntity<Object> createFerme(@Valid @RequestBody Ferme ferme, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getAllErrors().stream()
-                    .map(error -> error.getDefaultMessage())
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toList();
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
@@ -40,10 +42,10 @@ public class FermeController {
     }
 
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Ferme>> getAllFermes() {
         List<Ferme> fermes = fermeService.getAllFermes();
-        return new ResponseEntity<>(fermes, HttpStatus.OK);
+        return  ResponseEntity.status(HttpStatus.OK).body(fermes);
     }
 
     @GetMapping("/{id}")

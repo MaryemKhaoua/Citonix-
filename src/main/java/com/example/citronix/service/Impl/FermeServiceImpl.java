@@ -7,18 +7,20 @@ import com.example.citronix.repository.FermeRepository;
 import com.example.citronix.service.FermeService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@AllArgsConstructor
+@Component(value = "fermeImpl")
 public class FermeServiceImpl implements FermeService {
 
     private final FermeRepository fermeRepository;
 
-
+    public FermeServiceImpl(FermeRepository fermeRepository) {
+        this.fermeRepository = fermeRepository;
+    }
 
     @Override
     public Ferme saveFerme(Ferme ferme) {

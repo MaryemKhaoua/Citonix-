@@ -1,5 +1,7 @@
 package com.example.citronix.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Setter
+@Getter
 public class Champ {
 
     @Id
@@ -21,19 +25,9 @@ public class Champ {
 
     @Column(nullable = false)
     private Double area;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ferme_id", nullable = false)
     private Ferme ferme;
     @OneToMany(mappedBy = "champ", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Arbre> arbres;
-
-    public boolean isValidArea() {
-        return area >= 0.1 &&
-                area <= (ferme.getTotalArea() * 0.5);
-    }
-
-    public boolean canAddTree(Arbre arbre) {
-        long treeCount = arbres.size() + 1;
-        return treeCount <= (area * 100);
-    }
 }

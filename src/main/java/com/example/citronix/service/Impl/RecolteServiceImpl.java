@@ -4,6 +4,7 @@ import com.example.citronix.domain.entities.Arbre;
 import com.example.citronix.domain.entities.Recolte;
 import com.example.citronix.domain.entities.RecolteDetail;
 import com.example.citronix.domain.enums.Saison;
+import com.example.citronix.exception.ResourceNotFoundException;
 import com.example.citronix.repository.ArbreRepository;
 import com.example.citronix.repository.RecolteDetailRepository;
 import com.example.citronix.repository.RecolteRepository;
@@ -68,6 +69,16 @@ public class RecolteServiceImpl implements RecolteService {
         }
 
         return savedRecolte;
+    }
+    public Recolte updateRecolte(Long id, Recolte recolte) {
+        Recolte existingRecolte = recolteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recolte not found with id " + id));
+
+        existingRecolte.setSaison(recolte.getSaison());
+        existingRecolte.setRecolteDate(recolte.getRecolteDate());
+        existingRecolte.setTotalQuantity(recolte.getTotalQuantity());
+
+        return recolteRepository.save(existingRecolte);
     }
 
     @Override

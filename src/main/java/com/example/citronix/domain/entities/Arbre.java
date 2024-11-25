@@ -1,5 +1,7 @@
 package com.example.citronix.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +22,7 @@ public class Arbre {
 
     private LocalDate plantingDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "champ_id")
     private Champ champ;
 
@@ -45,6 +47,7 @@ public class Arbre {
     }
 
     public boolean isProductive() {
+
         return getAge() <= 20;
     }
 

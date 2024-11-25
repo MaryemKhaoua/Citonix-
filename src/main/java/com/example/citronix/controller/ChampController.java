@@ -22,7 +22,7 @@ public class ChampController {
     @Autowired
     private FermeService fermeService;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Champ> addChamp(@RequestBody Champ champ) {
         Long fermeId = champ.getFerme().getId();
 
@@ -38,9 +38,7 @@ public class ChampController {
         return ResponseEntity.ok(savedChamp);
     }
 
-
-
-@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Champ> updateChamp(@PathVariable Long id, @RequestBody Champ updatedChamp) {
         if (updatedChamp.getArea() <= 0) {
             throw new IllegalArgumentException("Champ area must be greater than 0");
@@ -70,5 +68,11 @@ public class ChampController {
     public ResponseEntity<Void> deleteChamp(@PathVariable Long id) {
         champService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Champ>> getAllChamps() {
+        List<Champ> champs = champService.findAll();
+        return ResponseEntity.ok(champs);
     }
 }

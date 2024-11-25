@@ -36,6 +36,16 @@ public class RecolteController {
             @RequestBody RecolteDetail detail) {
         return ResponseEntity.ok(recolteService.addRecolteDetail(recolteId, detail));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<RecolteDTO> updateRecolte(
+            @PathVariable Long id,
+            @RequestBody RecolteDTO recolteDTO) {
+        Recolte recolte = recolteMapper.toEntity(recolteDTO);
+
+        Recolte updatedRecolte = recolteService.updateRecolte(id, recolte);
+
+        return ResponseEntity.ok(recolteMapper.toDto(updatedRecolte));
+    }
 
     @GetMapping
     public ResponseEntity<Page<Recolte>> getAllRecoltes(

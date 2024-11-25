@@ -1,5 +1,6 @@
 package com.example.citronix.service.Impl;
 
+import com.example.citronix.domain.entities.Arbre;
 import com.example.citronix.domain.entities.Champ;
 import com.example.citronix.domain.entities.Ferme;
 import com.example.citronix.exception.*;
@@ -70,6 +71,10 @@ public class ChampServiceImpl implements ChampService {
             throw new ChampNotFoundException("Champ not found with id: " + id);
         }
         champRepository.deleteById(id);
+    }
+    @Override
+    public List<Champ> findAll() {
+        return champRepository.findAll();
     }
 
     private void validateChampConstraints(Champ champ, Ferme ferme) {

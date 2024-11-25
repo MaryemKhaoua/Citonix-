@@ -1,9 +1,9 @@
 package com.example.citronix.domain.entities;
 
 import com.example.citronix.domain.enums.Saison;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +11,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Recolte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
